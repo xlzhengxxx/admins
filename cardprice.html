@@ -1,0 +1,317 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>卡种管理</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+		<script type="application/x-javascript">
+			addEventListener("load", function() {
+				setTimeout(hideURLbar, 0);
+			}, false);
+
+			function hideURLbar() {
+				window.scrollTo(0, 1);
+			}
+		</script>
+		<!-- Bootstrap Core CSS -->
+		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<!-- Custom CSS -->
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+		<!-- font CSS -->
+		<!-- font-awesome icons -->
+		<link href="css/font-awesome.css" rel="stylesheet">
+		<!-- //font-awesome icons -->
+		<!-- js-->
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/modernizr.custom.js"></script>
+		<!--animate-->
+		<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+		<script src="js/wow.min.js"></script>
+		<script>
+			new WOW().init();
+		</script>
+		<!--//end-animate-->
+		<!-- Metis Menu -->
+		<script src="js/metisMenu.min.js"></script>
+		<script src="js/custom.js"></script>
+		<link href="css/custom.css" rel="stylesheet">
+		<!--//Metis Menu -->
+	</head>
+
+	<body class="cbp-spmenu-push">
+		<div class="main-content">
+			<!--left-fixed -navigation-->
+			<div class=" sidebar" role="navigation">
+				<div class="navbar-collapse">
+					<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+						<ul class="nav" id="side-menu">
+							<li>
+								<a href="index.html"><i class="fa fa-home nav_icon"></i>主页</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-cogs nav_icon"></i>点卡管理 <span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level collapse">
+									<li>
+										<a href="cardtype.html">卡种管理</a>
+									</li>
+									<li>
+										<a href="cardpwd.html">卡密管理</a>
+									</li>
+									<li>
+									<a href="cardprice.html">面值管理</a>
+								</li>
+								</ul>
+								<!-- /nav-second-level -->
+							</li>
+							<li class="">
+								<a href="#"><i class="fa fa-book nav_icon"></i>用户管理 <span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level collapse">
+									<li>
+										<a href="users.html">用户管理</a>
+									</li>
+									<li>
+										<a href="admins.html">管理员管理</a>
+									</li>
+								</ul>
+								<!-- /nav-second-level -->
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-envelope nav_icon"></i>统计报表<span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level collapse">
+									<li>
+										<a href="count.html">报表信息</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-envelope nav_icon"></i>订单管理<span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level collapse">
+									<li>
+										<a href="orders.html">订单管理</a>
+									</li>
+								</ul>
+								<!-- //nav-second-level -->
+							</li>
+						</ul>
+						<!-- //sidebar-collapse -->
+					</nav>
+				</div>
+			</div>
+			<!--left-fixed -navigation-->
+			<!-- header-starts -->
+			<div class="sticky-header header-section ">
+				<div class="header-left">
+					<!--toggle button start-->
+					<button id="showLeftPush"><i class="fa fa-bars"></i></button>
+					<!--toggle button end-->
+					<!--logo -->
+					<div class="logo">
+						<a href="index.html">
+							<h1>呖咕呖咕</h1>
+							<span>点卡销售系统</span>
+						</a>
+					</div>
+					<!--//logo-->
+
+					<div class="clearfix"> </div>
+				</div>
+				<div class="header-right">
+					<div class="profile_details">		
+					<ul>
+						<li class="dropdown profile_details_drop">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+								<div class="profile_img">	
+									<div class="user-name">
+										<p>小卡</p>
+										
+									</div>
+									<i class="fa fa-angle-down lnr"></i>
+									<i class="fa fa-angle-up lnr"></i>
+									<div class="clearfix"></div>	
+								</div>	
+							</a>
+							<ul class="dropdown-menu drp-mnu">
+								<li> <a href="#" id="logout"><i class="fa fa-sign-out"></i>退出</a> </li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<!-- //header-ends -->
+			<!-- main content start-->
+			<div id="page-wrapper">
+				<div class="main-page" id="tablepage">
+					<div class="row">
+						<div class="col-md-7">
+							<h3 class="title1">卡种管理</h3>
+						</div>
+						<div class="col-md-2">
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入点卡种类" type="search" id="input-31" />
+						</div>
+						<div class="col-md-1">
+							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary">查询</span></a></h3>
+						</div>
+						<div class="col-md-1">
+							<h3 id="addbtn" style="padding-top: 5px;"><a href="#"><span class="label label-primary">添加</span></a></h3>
+						</div>
+					</div>
+					<div class="bs-example widget-shadow" data-example-id="contextual-table">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>点卡面值</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">1</th>
+									<td>1元</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">2</th>
+									<td>5元</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">3</th>
+									<td>10元</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">4</th>
+									<td>20元</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">5</th>
+									<td>30元</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">6</th>
+									<td>50元</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">7</th>
+									<td>100元</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+
+						</div>
+						<div class="col-md-4">
+							<nav>
+								<ul class="pagination pagination-lg">
+									<li>
+										<a href="#" aria-label="Previous"><span aria-hidden="true"><</span></a>
+									</li>
+									<li>
+										<a href="#">1</a>
+									</li>
+									<li>
+										<a href="#">2</a>
+									</li>
+									<li>
+										<a href="#">3</a>
+									</li>
+									<li>
+										<a href="#">4</a>
+									</li>
+									<li>
+										<a href="#">5</a>
+									</li>
+									<li>
+										<a href="#" aria-label="Next"><span aria-hidden="true">></span></a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+						<div class="col-md-4">
+
+						</div>
+					</div>
+				</div>
+				
+				<!--footer-->
+				<div class="footer">
+				<p>Copyright &copy; 2020.Company name All rights reserved.呖咕呖咕
+				</p>
+				</div>
+				<!--//footer-->
+			</div>
+			<!-- Classie -->
+			<script src="js/classie.js"></script>
+			<script>
+				var menuLeft = document.getElementById('cbp-spmenu-s1'),
+					showLeftPush = document.getElementById('showLeftPush'),
+					body = document.body;
+
+				showLeftPush.onclick = function() {
+					classie.toggle(this, 'active');
+					classie.toggle(body, 'cbp-spmenu-push-toright');
+					classie.toggle(menuLeft, 'cbp-spmenu-open');
+					disableOther('showLeftPush');
+				};
+
+				function disableOther(button) {
+					if(button !== 'showLeftPush') {
+						classie.toggle(showLeftPush, 'disabled');
+					}
+				}
+				var addbtn = document.getElementById('addbtn'),
+				returnbtn = document.getElementById('returnbtn');
+
+				addbtn.onclick = function() {
+					document.getElementById('tablepage').style.display = 'none';
+					document.getElementById('addpage').style.display = 'block';
+				}
+				returnbtn.onclick = function(){
+					document.getElementById('tablepage').style.display = 'block';
+					document.getElementById('addpage').style.display = 'none';
+				}
+			</script>
+			<!--scrolling js-->
+			<script src="js/jquery.nicescroll.js"></script>
+			<script src="js/scripts.js"></script>
+			<!--//scrolling js-->
+			<!-- Bootstrap Core JavaScript -->
+			<script src="js/bootstrap.js">
+			</script>
+	</body>
+
+</html>

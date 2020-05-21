@@ -1,0 +1,462 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>卡种管理</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+		<script type="application/x-javascript">
+			addEventListener("load", function() {
+				setTimeout(hideURLbar, 0);
+			}, false);
+
+			function hideURLbar() {
+				window.scrollTo(0, 1);
+			}
+		</script>
+		<!-- Bootstrap Core CSS -->
+		<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+		<!-- Custom CSS -->
+		<link href="css/style.css" rel='stylesheet' type='text/css' />
+		<!-- font CSS -->
+		<!-- font-awesome icons -->
+		<link href="css/font-awesome.css" rel="stylesheet">
+		<!-- //font-awesome icons -->
+		<!-- js-->
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/modernizr.custom.js"></script>
+		<!--animate-->
+		<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+		<script src="js/wow.min.js"></script>
+		<script>
+			new WOW().init();
+		</script>
+		<!--//end-animate-->
+		<!-- Metis Menu -->
+		<script src="js/metisMenu.min.js"></script>
+		<script src="js/custom.js"></script>
+		<link href="css/custom.css" rel="stylesheet">
+		<!--//Metis Menu -->
+	</head>
+
+	<body class="cbp-spmenu-push">
+		<div class="main-content">
+			<!--left-fixed -navigation-->
+			<div class=" sidebar" role="navigation">
+				<div class="navbar-collapse">
+					<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+						<ul class="nav" id="side-menu">
+							<li>
+								<a href="index.html"><i class="fa fa-home nav_icon"></i>主页</a>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-cogs nav_icon"></i>点卡管理 <span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level collapse">
+									<li>
+										<a href="cardtype.html">卡种管理</a>
+									</li>
+									<li>
+										<a href="cardpwd.html">卡密管理</a>
+									</li>
+									<li>
+									<a href="cardprice.html">面值管理</a>
+								</li>
+								</ul>
+								<!-- /nav-second-level -->
+							</li>
+							<li class="">
+								<a href="#"><i class="fa fa-book nav_icon"></i>用户管理 <span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level collapse">
+									<li>
+										<a href="users.html">用户管理</a>
+									</li>
+									<li>
+										<a href="admins.html">管理员管理</a>
+									</li>
+								</ul>
+								<!-- /nav-second-level -->
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-envelope nav_icon"></i>统计报表<span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level collapse">
+									<li>
+										<a href="count.html">报表信息</a>
+									</li>
+								</ul>
+							</li>
+							<li>
+								<a href="#"><i class="fa fa-envelope nav_icon"></i>订单管理<span class="fa arrow"></span></a>
+								<ul class="nav nav-second-level collapse">
+									<li>
+										<a href="orders.html">订单管理</a>
+									</li>
+								</ul>
+								<!-- //nav-second-level -->
+							</li>
+						</ul>
+						<!-- //sidebar-collapse -->
+					</nav>
+				</div>
+			</div>
+			<!--left-fixed -navigation-->
+			<!-- header-starts -->
+			<div class="sticky-header header-section ">
+				<div class="header-left">
+					<!--toggle button start-->
+					<button id="showLeftPush"><i class="fa fa-bars"></i></button>
+					<!--toggle button end-->
+					<!--logo -->
+					<div class="logo">
+						<a href="index.html">
+							<h1>呖咕呖咕</h1>
+							<span>点卡销售系统</span>
+						</a>
+					</div>
+					<!--//logo-->
+
+					<div class="clearfix"> </div>
+				</div>
+				<div class="header-right">
+					<div class="profile_details">		
+					<ul>
+						<li class="dropdown profile_details_drop">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+								<div class="profile_img">	
+									<div class="user-name">
+										<p>小卡</p>
+										
+									</div>
+									<i class="fa fa-angle-down lnr"></i>
+									<i class="fa fa-angle-up lnr"></i>
+									<div class="clearfix"></div>	
+								</div>	
+							</a>
+							<ul class="dropdown-menu drp-mnu">
+								<li> <a href="#" id="logout"><i class="fa fa-sign-out"></i>退出</a> </li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<!-- //header-ends -->
+			<!-- main content start-->
+			<div id="page-wrapper">
+				<div class="main-page" id="usertable">
+					<div class="row">
+						<div class="col-md-5">
+							<h3 class="title1">用户管理</h3>
+						</div>
+						<div class="col-md-2">
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入账号" type="search" id="input-31" />
+						</div>
+						<div class="col-md-2">
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入用户名" type="search" id="input-31" />
+						</div>
+						<div class="col-md-1">
+							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary">查询</span></a></h3>
+						</div>
+						<div class="col-md-1">
+							<h3 id="adduserbtn" style="padding-top: 5px;"><a data-toggle="modal" data-target="#users-addmodal" href="#"><span class="label label-primary">添加</span></a></h3>
+						</div>
+					</div>
+					<div class="bs-example widget-shadow" data-example-id="contextual-table">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>用户名</th>
+									<th>账号</th>
+									<th>密码</th>
+									<th>邮箱</th>
+									<th>电话</th>
+									<th>状态</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th scope="row">1</th>
+									<td>卡卡西</td>
+									<td>kkx123456</td>
+									<td>123456</td>
+									<td>123456@qq.com</td>
+									<td>15112345464</td>
+									<td>正常</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">2</th>
+									<td>栀子花开</td>
+									<td>zhizhihuakai</td>
+									<td>816822ads4</td>
+									<td>156846516@qq.com</td>
+									<td>18845646156</td>
+									<td>正常</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">3</th>
+									<td>乌兹</td>
+									<td>adc156865</td>
+									<td>8145ads5a64</td>
+									<td>88481616@qq.com</td>
+									<td>14735464615</td>
+									<td>正常</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">4</th>
+									<td>我们的约定</td>
+									<td>gg86412462</td>
+									<td>123asdzxc</td>
+									<td>897946835@qq.com</td>
+									<td>18245678154</td>
+									<td>正常</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">5</th>
+									<td>明日之后</td>
+									<td>anna1564622</td>
+									<td>8as4d5a</td>
+									<td>3456574244@qq.com</td>
+									<td>17745688223</td>
+									<td>正常</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">6</th>
+									<td>重拾记忆</td>
+									<td>94482234</td>
+									<td>15648613ada</td>
+									<td>1578154454@qq.com</td>
+									<td>15512455464</td>
+									<td>正常</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a href="">修改</a>
+									</td>
+								</tr>
+								<tr>
+									<th scope="row">7</th>
+									<td id="name">孤独成性</td>
+									<td id="number">481641as5</td>
+									<td id="password">qwertyu112</td>
+									<td id="email1">846515444@qq.com</td>
+									<td id="phone1">13348548844</td>
+									<td id="state">正常</td>
+									<td>
+										<a href="">删除</a>&nbsp;&nbsp;
+										<a class="userupdate" data-toggle="modal" data-target="#users-updatemodal" href="">修改</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!--修改用户modal-->
+					<div class="modal fade" id="users-updatemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+								</div>
+								<div class="modal-body">
+										<form class="form-horizontal">
+											<div class="form-group">
+												<label for="focusedinput" class="col-sm-2 control-label">用户名</label>
+												<div class="col-sm-8">
+													<input id="updatename" type="text" class="form-control1" id="focusedinput" placeholder="用户名...">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="focusedinput" class="col-sm-2 control-label">账号</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control1" id="focusedinput" placeholder="账号...">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="focusedinput" class="col-sm-2 control-label">密码</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control1" id="focusedinput" placeholder="密码...">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="focusedinput" class="col-sm-2 control-label">邮箱</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control1" id="email" placeholder="邮箱...">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="focusedinput" class="col-sm-2 control-label">电话</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control1" id="phone" placeholder="电话...">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="focusedinput" class="col-sm-2 control-label">状态</label>
+												<div class="col-sm-8">
+													<select name="selector1" id="selector1" class="form-control1">
+														<option>正常</option>
+														<option>禁用</option>
+													</select>
+												</div>
+											</div>
+										</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary">提交更改</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--添加用户modal-->
+					<div class="modal fade" id="users-addmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+								</div>
+								<div class="modal-body">
+										<form class="form-horizontal">
+											<div class="form-group">
+												<label for="focusedinput" class="col-sm-2 control-label">用户名</label>
+												<div class="col-sm-8">
+													<input id="updatename" type="text" class="form-control1" id="focusedinput" placeholder="用户名...">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="focusedinput" class="col-sm-2 control-label">账号</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control1" id="focusedinput" placeholder="账号...">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="focusedinput" class="col-sm-2 control-label">密码</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control1" id="focusedinput" placeholder="密码...">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="focusedinput" class="col-sm-2 control-label">邮箱</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control1" id="email" placeholder="邮箱...">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="focusedinput" class="col-sm-2 control-label">电话</label>
+												<div class="col-sm-8">
+													<input type="text" class="form-control1" id="phone" placeholder="电话...">
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="focusedinput" class="col-sm-2 control-label">状态</label>
+												<div class="col-sm-8">
+													<select name="selector1" id="selector1" class="form-control1">
+														<option>正常</option>
+														<option>禁用</option>
+													</select>
+												</div>
+											</div>
+										</form>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+									<button type="button" class="btn btn-primary">添加</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+
+						</div>
+						<div class="col-md-4">
+							<nav>
+								<ul class="pagination pagination-lg">
+									<li>
+										<a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>
+									</li>
+									<li>
+										<a href="#">1</a>
+									</li>
+									<li>
+										<a href="#">2</a>
+									</li>
+									<li>
+										<a href="#">3</a>
+									</li>
+									<li>
+										<a href="#">4</a>
+									</li>
+									<li>
+										<a href="#">5</a>
+									</li>
+									<li>
+										<a href="#" aria-label="Next"><span aria-hidden="true">»</span></a>
+									</li>
+								</ul>
+							</nav>
+						</div>
+						<div class="col-md-4">
+
+						</div>
+					</div>
+				</div>
+				<!--footer-->
+				<div class="footer">
+				<p>Copyright &copy; 2020.Company name All rights reserved.呖咕呖咕
+				</p>
+			</div>
+				<!--//footer-->
+			</div>
+			<!-- Classie -->
+			<script src="js/classie.js"></script>
+			<script>
+				var menuLeft = document.getElementById('cbp-spmenu-s1'),
+					showLeftPush = document.getElementById('showLeftPush'),
+					body = document.body;
+
+				showLeftPush.onclick = function() {
+					classie.toggle(this, 'active');
+					classie.toggle(body, 'cbp-spmenu-push-toright');
+					classie.toggle(menuLeft, 'cbp-spmenu-open');
+					disableOther('showLeftPush');
+				};
+
+				function disableOther(button) {
+					if(button !== 'showLeftPush') {
+						classie.toggle(showLeftPush, 'disabled');
+					}
+				}
+			</script>
+			<!--scrolling js-->
+			<script src="js/jquery.nicescroll.js"></script>
+			<script src="js/scripts.js"></script>
+			<!--//scrolling js-->
+			<!-- Bootstrap Core JavaScript -->
+			<script src="js/bootstrap.js">
+			</script>
+	</body>
+
+</html>
