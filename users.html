@@ -25,7 +25,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		<link href="css/font-awesome.css" rel="stylesheet">
 		<!-- //font-awesome icons -->
 		<!-- js-->
-		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/jquery.min.js"></script>
 		<script src="js/modernizr.custom.js"></script>
 		<!--animate-->
 		<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
@@ -42,7 +42,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	</head>
 
 	<body class="cbp-spmenu-push">
-		<div class="main-content">
+		<div class="main-content" id="main">
 			<!--left-fixed -navigation-->
 			<div class=" sidebar" role="navigation">
 				<div class="navbar-collapse">
@@ -152,13 +152,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<h3 class="title1">用户管理</h3>
 						</div>
 						<div class="col-md-2">
-							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入账号" type="search" id="input-31" />
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入账号" type="search" v-model="params.uNumber" />
 						</div>
 						<div class="col-md-2">
-							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入用户名" type="search" id="input-31" />
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入用户名" v-model="params.uName" type="search" />
 						</div>
 						<div class="col-md-1">
-							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary">查询</span></a></h3>
+							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary" @click="selectUsers()">查询</span></a></h3>
 						</div>
 						<div class="col-md-1">
 							<h3 id="adduserbtn" style="padding-top: 5px;"><a data-toggle="modal" data-target="#users-addmodal" href="#"><span class="label label-primary">添加</span></a></h3>
@@ -168,7 +168,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<table class="table">
 							<thead>
 								<tr>
-									<th>#</th>
 									<th>用户名</th>
 									<th>账号</th>
 									<th>密码</th>
@@ -179,95 +178,17 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>卡卡西</td>
-									<td>kkx123456</td>
-									<td>123456</td>
-									<td>123456@qq.com</td>
-									<td>15112345464</td>
-									<td>正常</td>
+								<tr v-for="(data,index) in dataList">
+									<td>{{data.uname}}</td>
+									<td>{{data.unumber}}</td>
+									<td>{{data.upassword}}</td>
+									<td>{{data.uemail}}</td>
+									<td>{{data.uphone}}</td>
+									<td v-if="data.ustate == 1">正常</td>
+									<td v-else="">禁用</td>
 									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>栀子花开</td>
-									<td>zhizhihuakai</td>
-									<td>816822ads4</td>
-									<td>156846516@qq.com</td>
-									<td>18845646156</td>
-									<td>正常</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td>乌兹</td>
-									<td>adc156865</td>
-									<td>8145ads5a64</td>
-									<td>88481616@qq.com</td>
-									<td>14735464615</td>
-									<td>正常</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">4</th>
-									<td>我们的约定</td>
-									<td>gg86412462</td>
-									<td>123asdzxc</td>
-									<td>897946835@qq.com</td>
-									<td>18245678154</td>
-									<td>正常</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">5</th>
-									<td>明日之后</td>
-									<td>anna1564622</td>
-									<td>8as4d5a</td>
-									<td>3456574244@qq.com</td>
-									<td>17745688223</td>
-									<td>正常</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">6</th>
-									<td>重拾记忆</td>
-									<td>94482234</td>
-									<td>15648613ada</td>
-									<td>1578154454@qq.com</td>
-									<td>15512455464</td>
-									<td>正常</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">7</th>
-									<td id="name">孤独成性</td>
-									<td id="number">481641as5</td>
-									<td id="password">qwertyu112</td>
-									<td id="email1">846515444@qq.com</td>
-									<td id="phone1">13348548844</td>
-									<td id="state">正常</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a class="userupdate" data-toggle="modal" data-target="#users-updatemodal" href="">修改</a>
+										<a href="#" @click="deleteUser(data.uid)">删除</a>&nbsp;&nbsp;
+										<a href="#" data-toggle="modal" data-target="#users-updatemodal" @click="updateUser(data)">修改</a>
 									</td>
 								</tr>
 							</tbody>
@@ -285,39 +206,39 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">用户名</label>
 												<div class="col-sm-8">
-													<input id="updatename" type="text" class="form-control1" id="focusedinput" placeholder="用户名...">
+													<input type="text" class="form-control1"  placeholder="用户名..." v-model="update.uname">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">账号</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="focusedinput" placeholder="账号...">
+													<input type="text" class="form-control1" placeholder="账号..." v-model="update.unumber">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">密码</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="focusedinput" placeholder="密码...">
+													<input type="text" class="form-control1" placeholder="密码..." v-model="update.upassword">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">邮箱</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="email" placeholder="邮箱...">
+													<input type="text" class="form-control1" placeholder="邮箱..." v-model="update.uemail">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">电话</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="phone" placeholder="电话...">
+													<input type="text" class="form-control1" placeholder="电话..." v-model="update.uphone">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">状态</label>
 												<div class="col-sm-8">
-													<select name="selector1" id="selector1" class="form-control1">
-														<option>正常</option>
-														<option>禁用</option>
+													<select name="selector1" class="form-control1" v-model="update.ustate">
+														<option value="1">正常</option>
+														<option value="2">禁用</option>
 													</select>
 												</div>
 											</div>
@@ -325,7 +246,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary">提交更改</button>
+									<button type="button" class="btn btn-primary" @click="saveUpdate()">提交更改</button>
 								</div>
 							</div>
 						</div>
@@ -342,39 +263,39 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">用户名</label>
 												<div class="col-sm-8">
-													<input id="updatename" type="text" class="form-control1" id="focusedinput" placeholder="用户名...">
+													<input type="text" class="form-control1" placeholder="用户名..." v-model="add.uname">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">账号</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="focusedinput" placeholder="账号...">
+													<input type="text" class="form-control1" placeholder="账号..." v-model="add.unumber">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">密码</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="focusedinput" placeholder="密码...">
+													<input type="text" class="form-control1" id="focusedinput" placeholder="密码..." v-model="add.upassword">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">邮箱</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="email" placeholder="邮箱...">
+													<input type="text" class="form-control1" id="email" placeholder="邮箱..." v-model="add.uemail">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">电话</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="phone" placeholder="电话...">
+													<input type="text" class="form-control1" id="phone" placeholder="电话..." v-model="add.uphone">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">状态</label>
 												<div class="col-sm-8">
-													<select name="selector1" id="selector1" class="form-control1">
-														<option>正常</option>
-														<option>禁用</option>
+													<select name="selector1" id="selector1" class="form-control1" v-model="add.ustate">
+														<option value="1">正常</option>
+														<option value="2">禁用</option>
 													</select>
 												</div>
 											</div>
@@ -382,7 +303,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary">添加</button>
+									<button type="button" class="btn btn-primary" @click="addUser">添加</button>
 								</div>
 							</div>
 						</div>
@@ -392,31 +313,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 						</div>
 						<div class="col-md-4">
-							<nav>
-								<ul class="pagination pagination-lg">
-									<li>
-										<a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>
-									</li>
-									<li>
-										<a href="#">1</a>
-									</li>
-									<li>
-										<a href="#">2</a>
-									</li>
-									<li>
-										<a href="#">3</a>
-									</li>
-									<li>
-										<a href="#">4</a>
-									</li>
-									<li>
-										<a href="#">5</a>
-									</li>
-									<li>
-										<a href="#" aria-label="Next"><span aria-hidden="true">»</span></a>
-									</li>
-								</ul>
-							</nav>
+							<ul id="page"></ul>
 						</div>
 						<div class="col-md-4">
 
@@ -430,6 +327,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			</div>
 				<!--//footer-->
 			</div>
+		</div>
 			<!-- Classie -->
 			<script src="js/classie.js"></script>
 			<script>
@@ -455,7 +353,158 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			<script src="js/scripts.js"></script>
 			<!--//scrolling js-->
 			<!-- Bootstrap Core JavaScript -->
-			<script src="js/bootstrap.js">
+			<script src="js/bootstrap.js"></script>
+			<!--引入vue.js-->
+			<script src="js/vue.min.js"></script>
+			<!--引入分页插件js-->
+			<script src="js/bootstrap-paginator.js"></script>
+			<script>
+				var vm = new Vue({
+					el:"#main", //包含整个页面 div 的 id名称
+					data:{
+						//查询用户信息所需的参数
+						params:{
+							uNumber:'',
+							uName:'',
+							pageSize:10,
+							currentPage:1, //当前页
+							pages:1
+						},
+						//修改所需参数
+						update:{
+							uid:null,
+							uname:"",
+							unumber:"",
+							upassword:"",
+							uemail:"",
+							uphone:"",
+							ustate:1
+						},
+						//添加所需参数
+						add:{
+							uname:"",
+							unumber:"",
+							upassword:"",
+							uemail:"",
+							uphone:"",
+							ustate:1
+						},
+						dataList:[],//用户保存请求到的数据（是一个list）
+					},
+					//页面初始化加载的方法
+					mounted:function () {
+						//初始化分页模板
+						var options = {
+							bootstrapMajorVersion: 3,
+							currentPage: this.params.currentPage, // 当前页数
+							numberOfPages: 5, // 显示按钮的数量
+							totalPages: this.params.pages, // 总页数
+							onPageClicked:function(event, originalEvent, type,page){
+								vm.params.currentPage=page;
+								vm.selectUsers();
+							},
+							onPageChanged:function(event, oldPage, newPage){
+								vm.params.currentPage=newPage;
+								vm.selectUsers();
+							}
+						};
+						$("#page").bootstrapPaginator(options);
+
+						this.selectUsers();
+					},
+					//页面单击事件
+					methods:{
+						//查询用户信息
+						selectUsers:function () {
+							var url = "http://localhost:8000/users/selectUsers";
+							$.get(url,this.params,function (data) {
+								if (data.code === 0){
+									//console.log(data); //打印结果到控制台
+									vm.dataList = data.dataList; //结果
+									vm.params.pages = data.pages;//总页数
+									vm.params.currentPage = data.pageNum //第几页
+									//设置分页(当前页,总页数)
+									$("#page").bootstrapPaginator('setOptions',{currentPage:vm.params.currentPage,totalPages:vm.params.pages});
+								}else {
+									alert(data.msg);
+								}
+							});
+						},
+
+						//删除
+						deleteUser:function (uId) {
+							var flag = confirm("确定删除这条数据吗?");
+							if (flag){
+								var url = "http://localhost:8000/users/deleteUsers";
+								var args = {
+									"uId":uId
+								}
+								$.post(url,args,function (data) {
+									if (data.code === 0){
+										alert(data.msg);
+										//删除成功后重新查一遍
+										vm.selectUsers();
+									}else {
+										alert(data.msg);
+									}
+								});
+							}
+						},
+
+						//修改
+						updateUser:function (data) {
+							console.log(data);
+							vm.update.uid = data.uid;
+							vm.update.uname = data.uname;
+							vm.update.unumber = data.unumber;
+							vm.update.upassword = data.upassword;
+							vm.update.uemail = data.uemail;
+							vm.update.uphone = data.uphone;
+							vm.update.ustate = data.ustate;
+							//这里本来是 uState,uPhone...的，也就是要和实体类属性一样，但是因为你的 前面只有一个字母 他不能识别为驼峰命名规则，所有你传值的时候注意点，后台有@RequestBody的
+						},
+
+						//保存更改(后台参数有 @RequestBody 注解 的用下面这种请求方式)(还有你建的数据库表不符合驼峰命名规则，有@RequestBody 注解的时候， 实体类属性是 uId 要写成 uid)
+						saveUpdate:function(){
+							$.ajax({
+								type: "POST",
+								url:"http://localhost:8000/users/updateUsers",
+								dataType:"json",
+								contentType: "application/json",
+								data:JSON.stringify(vm.update),
+								success:function (data) {
+									if (data.code === 0){
+										alert(data.msg);
+										$("#users-updatemodal").modal('hide');//关闭模特框
+										vm.selectUsers();
+									}else {
+										alert(data.msg);
+									}
+								}
+							});
+						},
+
+						//添加
+						addUser:function () {
+							$.ajax({
+								type: "POST",
+								url:"http://localhost:8000/users/addUsers",
+								dataType:"json",
+								contentType: "application/json",
+								data:JSON.stringify(vm.add),
+								success:function (data) {
+									if (data.code === 0){
+										alert(data.msg);
+										$("#users-addmodal").modal('hide');//关闭模特框
+										vm.selectUsers();
+									}else {
+										alert(data.msg);
+									}
+								}
+							});
+						}
+					}
+				});
 			</script>
 	</body>
 
