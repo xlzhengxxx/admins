@@ -42,7 +42,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	</head>
 
 	<body class="cbp-spmenu-push">
-		<div class="main-content">
+		<div class="main-content" id="main">
 			<!--left-fixed -navigation-->
 			<div class=" sidebar" role="navigation">
 				<div class="navbar-collapse">
@@ -154,10 +154,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入账号" type="search" v-modal="params.aNumber"/>
 						</div>
 						<div class="col-md-2">
-							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入名称" type="search" v-midal="params.aName" />
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入名称" type="search" v-modal="params.aName" />
 						</div>
 						<div class="col-md-1">
-							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary" @click="slectAdmins">查询</span></a></h3>
+							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary" @click="slectAdmins()">查询</span></a></h3>
 						</div>
 						<div class="col-md-1">
 							<h3 id="addadminbtn" style="padding-top: 5px;"><a data-toggle="modal" data-target="#admins-addmodal" href="#"><span class="label label-primary">添加</span></a></h3>
@@ -291,7 +291,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			</div>
 				
 				<!--//footer-->
+				</div>
 			</div>
+		</div>
 			<!-- Classie -->
 			<script src="js/classie.js"></script>
 			<script>
@@ -396,7 +398,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							deleteAdmin:function (aId) {
 								var flag = confirm("确定删除这条数据吗?");
 								if (flag){
-									var url = "http://localhost:8000/admins/seleteAdmins";
+									var url = "http://localhost:8000/admins/deleteAdmins";
 									var args = {
 										"aId":aId
 									}
