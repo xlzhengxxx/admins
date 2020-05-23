@@ -2,7 +2,7 @@
 <html>
 
 	<head>
-		<title>卡种管理</title>
+		<title>管理员管理</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
@@ -151,13 +151,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<h3 class="title1">管理员管理</h3>
 						</div>
 						<div class="col-md-2">
-							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入账号" type="search" id="input-31" />
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入账号" type="search" v-modal="params.aNumber"/>
 						</div>
 						<div class="col-md-2">
-							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入名称" type="search" id="input-31" />
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入名称" type="search" v-midal="params.aName" />
 						</div>
 						<div class="col-md-1">
-							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary">查询</span></a></h3>
+							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary" @click="slectAdmins">查询</span></a></h3>
 						</div>
 						<div class="col-md-1">
 							<h3 id="addadminbtn" style="padding-top: 5px;"><a data-toggle="modal" data-target="#admins-addmodal" href="#"><span class="label label-primary">添加</span></a></h3>
@@ -167,7 +167,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<table class="table">
 							<thead>
 								<tr>
-									<th>#</th>
 									<th>名称</th>
 									<th>账号</th>
 									<th>密码</th>
@@ -176,122 +175,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>小卡</td>
-									<td>000001</td>
-									<td>123456</td>
-									<td>66666666@qq.com</td>
+								<tr v-for="(data,index) in dataList">
+									<td>{{data.aname}}</td>
+									<td>{{data.anumber}}</td>
+									<td>{{data.apassword}}</td>
+									<td>{{data.aemail}}</td>
 									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a data-toggle="modal" data-target="#admins-updatemodal" href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>小小</td>
-									<td>000002</td>
-									<td>123456</td>
-									<td>89413213@qq.com</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td>笑笑</td>
-									<td>000003</td>
-									<td>123456</td>
-									<td>89456564@qq.com</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">4</th>
-									<td>安娜</td>
-									<td>000004</td>
-									<td>845161</td>
-									<td>778894455@qq.com</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">5</th>
-									<td>小新</td>
-									<td>000005</td>
-									<td>781651</td>
-									<td>974156446@qq.com</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">6</th>
-									<td>珂珂</td>
-									<td>000006</td>
-									<td>894115</td>
-									<td>1344641254@qq.com</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">7</th>
-									<td>卡卡</td>
-									<td>000007</td>
-									<td>879665</td>
-									<td>132484841@qq.com</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
+										<a href="#" @click="deleteAdmin(data.aid)">删除</a>&nbsp;&nbsp;
+										<a data-toggle="modal" data-target="#admins-updatemodal" href="#" @click="updateAdmin(data)">修改</a>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<div class="row">
-						<div class="col-md-4">
-
-						</div>
-						<div class="col-md-4">
-							<nav>
-								<ul class="pagination pagination-lg">
-									<li>
-										<a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>
-									</li>
-									<li>
-										<a href="#">1</a>
-									</li>
-									<li>
-										<a href="#">2</a>
-									</li>
-									<li>
-										<a href="#">3</a>
-									</li>
-									<li>
-										<a href="#">4</a>
-									</li>
-									<li>
-										<a href="#">5</a>
-									</li>
-									<li>
-										<a href="#" aria-label="Next"><span aria-hidden="true">»</span></a>
-									</li>
-								</ul>
-							</nav>
-						</div>
-						<div class="col-md-4">
-
-						</div>
-					</div>
-				</div>
 				<!--添加管理员modal-->
 					<div class="modal fade" id="admins-addmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 						<div class="modal-dialog">
@@ -304,32 +200,32 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">名称</label>
 												<div class="col-sm-8">
-													<input id="updatename" type="text" class="form-control1" id="focusedinput" placeholder="管理员名称...">
+													<input  type="text" class="form-control1"  placeholder="管理员名称..." v-model="add.aname">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">账号</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="focusedinput" placeholder="账号...">
+													<input type="text" class="form-control1"  placeholder="账号..." v-model="add.anumber">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">密码</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="focusedinput" placeholder="密码...">
+													<input type="text" class="form-control1"  placeholder="密码..." v-model="add.apasswpord">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">邮箱</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="email" placeholder="邮箱...">
+													<input type="text" class="form-control1"  placeholder="邮箱..." v-model="add.aemail">
 												</div>
 											</div>
 										</form>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary">添加</button>
+									<button type="button" class="btn btn-primary" @click="addAdmin">添加</button>
 								</div>
 							</div>
 						</div>
@@ -346,36 +242,48 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">名称</label>
 												<div class="col-sm-8">
-													<input id="updatename" type="text" class="form-control1" id="focusedinput" placeholder="管理员名称...">
+													<input  type="text" class="form-control1"  placeholder="管理员名称..." v-model="update.aname">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">账号</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="focusedinput" placeholder="账号...">
+													<input type="text" class="form-control1"  placeholder="账号..." v-model="update.anumber">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">密码</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="focusedinput" placeholder="密码...">
+													<input type="text" class="form-control1" id="focusedinput" placeholder="密码..." v-model="update.apassword">
 												</div>
 											</div>
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">邮箱</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1" id="email" placeholder="邮箱...">
+													<input type="text" class="form-control1" id="email" placeholder="邮箱..." v-model="update.aemail">
 												</div>
 											</div>
 										</form>
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-									<button type="button" class="btn btn-primary">提交更改</button>
+									<button type="button" class="btn btn-primary" @click="saveUpdate()">提交更改</button>
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-4">
+
+							</div>
+							<div class="col-md-4">
+								<ul id="page"></ul>
+							</div>
+							<div class="col-md-4">
+
+							</div>
+						</div>
 					</div>
+
 				<!--footer-->
 					<div class="footer">
 				<p>Copyright &copy; 2020.Company name All rights reserved.呖咕呖咕
@@ -410,8 +318,154 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			<script src="js/scripts.js"></script>
 			<!--//scrolling js-->
 			<!-- Bootstrap Core JavaScript -->
-			<script src="js/bootstrap.js">
-			</script>
+			<script src="js/bootstrap.js"></script>
+			<!--引入vue.js-->
+			<script src="js/vue.min.js"></script>
+			<!--引入分页插件js-->
+			<script src="js/bootstrap-paginator.js"></script>
+				<script>
+					var vm = new Vue({
+						el:"#main",
+						data:{
+							//条件查询管理员的参数
+							params:{
+								aNumber:'',
+								aName:'',
+								pageSize:10,
+								currentPage:1,//当前页
+								pages:1
+							},
+							//修改所需参数
+							update:{
+								aid:null,
+								aname:"",
+								anumber:"",
+								apassword:"",
+								aemail:""
+							},
+							//添加所需参数
+							add:{
+								aname:"",
+								anumber:"",
+								apassword:"",
+								aemail:""
+							},
+							dateList:[],//用户保存请求到的数据的list
+						},
+						//页面初始化加载的方法
+						mounted:function () {
+							//初始化分页模板
+							var options = {
+								bootstrapMajorVersion:3,
+								currentPage:this.params.currentPage,//当前页数
+								numberOfPages:5,//显示分页按钮的数量
+								totalPages:this.params.pages,//总页数
+								onPageClicked:function (event,originalEvent,type,page) {
+									vm.params.currentPage=page;
+									vm.selectAdmins();
+								},
+								onPageChanged:function(event, oldPage, newPage){
+									vm.params.currentPage=newPage;
+									vm.selectAdmins();
+								}
+							};
+							$("#page").bootstrapPaginator(options);
+
+							this.selectAdmins();
+
+						},
+						//页面点击事件
+						methods:{
+							//查询管理员信息
+							selectAdmins:function () {
+								var url = "http://localhost:8000/admins/selectAdmins";
+								$.get(url,this.params,function (data) {
+									if (data.code === 0){
+										//console.log(data); //打印结果到控制台
+										vm.dataList = data.dataList; //结果
+										vm.params.pages = data.pages;//总页数
+										vm.params.currentPage = data.pageNum //第几页
+										//设置分页(当前页,总页数)
+										$("#page").bootstrapPaginator('setOptions',{currentPage:vm.params.currentPage,totalPages:vm.params.pages});
+									}else {
+										alert(data.msg);
+									}
+								});
+							},
+							//删除
+							deleteAdmin:function (aId) {
+								var flag = confirm("确定删除这条数据吗?");
+								if (flag){
+									var url = "http://localhost:8000/admins/seleteAdmins";
+									var args = {
+										"aId":aId
+									}
+									$.post(url,args,function (data) {
+										if (data.code === 0){
+											alert(data.msg);
+											//删除成功后重新查一遍
+											vm.selectAdmins();
+										}else {
+											alert(data.msg);
+										}
+									});
+								}
+							},
+
+							//修改
+							updateAdmin:function (data) {
+								console.log(data);
+								vm.update.aid = data.aid;
+								vm.update.aname = data.aname;
+								vm.update.anumber = data.anumber;
+								vm.update.apassword = data.apassword;
+								vm.update.aemail = data.aemail;
+
+								//这里本来是 uState,uPhone...的，也就是要和实体类属性一样，但是因为你的 前面只有一个字母 他不能识别为驼峰命名规则，所有你传值的时候注意点，后台有@RequestBody的
+							},
+
+							//保存更改(后台参数有 @RequestBody 注解 的用下面这种请求方式)(还有你建的数据库表不符合驼峰命名规则，有@RequestBody 注解的时候， 实体类属性是 uId 要写成 uid)
+							saveUpdate:function(){
+								$.ajax({
+									type: "POST",
+									url:"http://localhost:8000/admins/updateAdmins",
+									dataType:"json",
+									contentType: "application/json",
+									data:JSON.stringify(vm.update),
+									success:function (data) {
+										if (data.code === 0){
+											alert(data.msg);
+											$("#admins-updatemodal").modal('hide');//关闭模特框
+											vm.selectAdmins();
+										}else {
+											alert(data.msg);
+										}
+									}
+								});
+							},
+
+							//添加
+							addAdmin:function () {
+								$.ajax({
+									type: "POST",
+									url:"http://localhost:8000/admins/addAdmins",
+									dataType:"json",
+									contentType: "application/json",
+									data:JSON.stringify(vm.add),
+									success:function (data) {
+										if (data.code === 0){
+											alert(data.msg);
+											$("#admins-addmodal").modal('hide');//关闭模特框
+											vm.selectAdmins();
+										}else {
+											alert(data.msg);
+										}
+									}
+								});
+							}
+						}
+					});
+				</script>
 	</body>
 
 </html>
