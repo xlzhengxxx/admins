@@ -42,7 +42,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	</head>
 
 	<body class="cbp-spmenu-push">
-		<div class="main-content">
+		<div class="main-content" id="main">
 			<!--left-fixed -navigation-->
 			<div class=" sidebar" role="navigation">
 				<div class="navbar-collapse">
@@ -152,10 +152,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<h3 class="title1">卡种管理</h3>
 						</div>
 						<div class="col-md-2">
-							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入点卡种类" type="search" id="input-31" />
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入点卡种类" type="search" v-model="params.tName" />
 						</div>
 						<div class="col-md-1">
-							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary">查询</span></a></h3>
+							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary" @click="selectCardtype()">查询</span></a></h3>
 						</div>
 						<div class="col-md-1">
 							<h3 id="addbtn" style="padding-top: 5px;"><a data-toggle="modal" data-target="#cardtype-addmodal"  href="#"><span class="label label-primary">添加</span></a></h3>
@@ -194,13 +194,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<div class="form-group">
 										<label for="focusedinput" class="col-sm-2 control-label">点卡种类</label>
 										<div class="col-sm-8">
-												<input  type="text" class="form-control1"  placeholder="请输入点卡种类名称..." v-modal="add.tname">
+												<input  type="text" class="form-control1"  placeholder="请输入点卡种类名称..." v-model="add.tname">
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="focusedinput" class="col-sm-2 control-label">点卡图片</label>
 										<div class="col-sm-8">
-											<input  type="text" class="form-control1"  placeholder="请输入点卡种类名称..." v-modal="add.timg">
+											<input  type="text" class="form-control1"  placeholder="请输入点卡图片..." v-model="add.timg">
 										</div>
 									</div>
 								</form>
@@ -224,13 +224,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<div class="form-group">
 										<label for="focusedinput" class="col-sm-2 control-label">点卡种类</label>
 										<div class="col-sm-8">
-												<input  type="text" class="form-control1" placeholder="请输入点卡种类名称..." v-modal="update.tname">
+												<input  type="text" class="form-control1" placeholder="请输入点卡种类名称..." v-model="update.tname">
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="focusedinput" class="col-sm-2 control-label">点卡图片</label>
 										<div class="col-sm-8">
-											<input  type="text" class="form-control1" id="focusedinput" placeholder="请输入点卡种类名称..." v-modal="update.timg">
+											<input  type="text" class="form-control1" id="focusedinput" placeholder="请输入点卡种类名称..." v-model="update.timg">
 										</div>
 									</div>
 								</form>
@@ -298,7 +298,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					el:"#main",
 					data:{
 						params: {
-							tName: '',
+							tName:'',
 							pageSize: 10,
 							currentPage: 1, //当前页
 							pages: 1
@@ -312,7 +312,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						//添加所需参数
 						add:{
 							tname:"",
-							uimg:""
+							timg:""
 						},
 						dataList:[],//点卡种类保存请求到的数据（是一个list）
 					},
@@ -340,14 +340,14 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					//页面单击事件
 					methods: {
 						//查询用户信息
-						selectCardtype: function () {
+						selectCardtype:function () {
 							var url = "http://localhost:8000/cardtype/selectCardtype";
 							$.get(url, this.params, function (data) {
 								if (data.code === 0) {
 									//console.log(data); //打印结果到控制台
 									vm.dataList = data.dataList; //结果
 									vm.params.pages = data.pages;//总页数
-									vm.params.currentPage = data.pageNum; //第几页
+									vm.params.currentPage = data.pageNum //第几页
 									//设置分页(当前页,总页数)
 									$("#page").bootstrapPaginator('setOptions', {
 										currentPage: vm.params.currentPage,
@@ -360,7 +360,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						},
 
 						//删除
-						deleteCardtype: function (uId) {
+						deleteCardtype: function (tId) {
 							var flag = confirm("确定删除这条数据吗?");
 							if (flag) {
 								var url = "http://localhost:8000/cardtype/deleteCardtype";
@@ -408,7 +408,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							});
 						},
 						//添加
-						addUser: function () {
+						addCardtype: function () {
 							$.ajax({
 								type: "POST",
 								url: "http://localhost:8000/cardtype/addCardtype",

@@ -151,13 +151,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<h3 class="title1">管理员管理</h3>
 						</div>
 						<div class="col-md-2">
-							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入账号" type="search" v-modal="params.aNumber"/>
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入账号" type="search" v-model="params.aNumber"/>
 						</div>
 						<div class="col-md-2">
-							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入名称" type="search" v-modal="params.aName" />
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入名称" type="search" v-model="params.aName" />
 						</div>
 						<div class="col-md-1">
-							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary" @click="slectAdmins()">查询</span></a></h3>
+							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary" @click="selectAdmins()">查询</span></a></h3>
 						</div>
 						<div class="col-md-1">
 							<h3 id="addadminbtn" style="padding-top: 5px;"><a data-toggle="modal" data-target="#admins-addmodal" href="#"><span class="label label-primary">添加</span></a></h3>
@@ -212,7 +212,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 											<div class="form-group">
 												<label for="focusedinput" class="col-sm-2 control-label">密码</label>
 												<div class="col-sm-8">
-													<input type="text" class="form-control1"  placeholder="密码..." v-model="add.apasswpord">
+													<input type="text" class="form-control1"  placeholder="密码..." v-model="add.apassword">
 												</div>
 											</div>
 											<div class="form-group">
@@ -271,19 +271,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-4">
 
-							</div>
-							<div class="col-md-4">
-								<ul id="page"></ul>
-							</div>
-							<div class="col-md-4">
+					</div>
+					<div class="row">
+						<div class="col-md-4">
 
-							</div>
+						</div>
+						<div class="col-md-4">
+							<ul id="page"></ul>
+						</div>
+						<div class="col-md-4">
+
 						</div>
 					</div>
-
 				<!--footer-->
 					<div class="footer">
 				<p>Copyright &copy; 2020.Company name All rights reserved.呖咕呖咕
@@ -352,7 +352,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								apassword:"",
 								aemail:""
 							},
-							dateList:[],//用户保存请求到的数据的list
+							dataList:[],//用户保存请求到的数据的list
 						},
 						//页面初始化加载的方法
 						mounted:function () {
