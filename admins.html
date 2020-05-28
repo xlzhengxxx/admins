@@ -125,7 +125,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 								<div class="profile_img">	
 									<div class="user-name">
-										<p>小卡</p>
+										<p>{{adminInfo.aname}}</p>
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
 									<i class="fa fa-angle-up lnr"></i>
@@ -133,7 +133,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</div>	
 							</a>
 							<ul class="dropdown-menu drp-mnu">
-								<li> <a href="#" id="logout"><i class="fa fa-sign-out"></i>退出</a> </li>
+								<li @click="logout()"> <a href="#" id="logout"><i class="fa fa-sign-out"></i>退出</a> </li>
 							</ul>
 						</li>
 					</ul>
@@ -329,6 +329,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					var vm = new Vue({
 						el:"#main",
 						data:{
+							adminInfo:{},
 							//条件查询管理员的参数
 							params:{
 								aNumber:'',
@@ -356,6 +357,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						},
 						//页面初始化加载的方法
 						mounted:function () {
+							this.adminInfo = JSON.parse(window.sessionStorage.getItem("admin"));
+							console.log(this.adminInfo)
+							if (this.adminInfo == null) {
+								alert("请先登陆!");
+								window.location.href = "login.html";
+							}
 							//初始化分页模板
 							var options = {
 								bootstrapMajorVersion:3,
@@ -464,6 +471,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 										}
 									}
 								});
+							},
+							logout:function () {
+								var flag = confirm("您确定要退出登录吗？")
+								if(flag){
+									sessionStorage.clear()
+									window.location.href = "login.html";
+								}
 							}
 						}
 					});

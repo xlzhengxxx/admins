@@ -125,7 +125,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 								<div class="profile_img">	
 									<div class="user-name">
-										<p>小卡</p>
+										<p>{{adminInfo.aname}}</p>
 										
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
@@ -134,7 +134,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</div>	
 							</a>
 							<ul class="dropdown-menu drp-mnu">
-								<li> <a href="#" id="logout"><i class="fa fa-sign-out"></i>退出</a> </li>
+								<li @click="logout()"> <a href="#" id="logout"><i class="fa fa-sign-out"></i>退出</a> </li>
 							</ul>
 						</li>
 					</ul>
@@ -175,7 +175,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<td>{{data.tname}}</td>
 									<td>{{data.timg}}</td>
 									<td>
-										<a href="#" @click="deleteCardtype(data.tid)">删除</a>&nbsp;&nbsp;
+<!--										<a href="#" @click="deleteCardtype(data.tid)">删除</a>&nbsp;&nbsp;-->
 										<a data-toggle="modal" data-target="#cardtype-updatemodal" href="#" @click="updateCardtype(data)">修改</a>
 									</td>
 								</tr>
@@ -237,7 +237,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-								<button type="button" class="btn btn-primary">提交更改</button>
+								<button type="button" class="btn btn-primary" @click="saveUpdate()">提交更改</button>
 							</div>
 						</div>
 					</div>
@@ -297,6 +297,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				var vm = new Vue({
 					el:"#main",
 					data:{
+						adminInfo:{},
 						params: {
 							tName:'',
 							pageSize: 10,
@@ -318,6 +319,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					},
 					//页面初始化加载的方法
 					mounted:function () {
+						this.adminInfo = JSON.parse(window.sessionStorage.getItem("admin"));
+						console.log(this.adminInfo)
+						if (this.adminInfo == null) {
+							alert("请先登陆!");
+							window.location.href = "login.html";
+						}
 						//初始化分页模板
 						var options = {
 							bootstrapMajorVersion: 3,
@@ -359,25 +366,25 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							});
 						},
 
-						//删除
-						deleteCardtype: function (tId) {
-							var flag = confirm("确定删除这条数据吗?");
-							if (flag) {
-								var url = "http://localhost:8000/cardtype/deleteCardtype";
-								var args = {
-									"tId": tId
-								}
-								$.post(url, args, function (data) {
-									if (data.code === 0) {
-										alert(data.msg);
-										//删除成功后重新查一遍
-										vm.selectCardtype();
-									} else {
-										alert(data.msg);
-									}
-								});
-							}
-						},
+						// //删除
+						// deleteCardtype: function (tId) {
+						// 	var flag = confirm("确定删除这条数据吗?");
+						// 	if (flag) {
+						// 		var url = "http://localhost:8000/cardtype/deleteCardtype";
+						// 		var args = {
+						// 			"tId": tId
+						// 		}
+						// 		$.post(url, args, function (data) {
+						// 			if (data.code === 0) {
+						// 				alert(data.msg);
+						// 				//删除成功后重新查一遍
+						// 				vm.selectCardtype();
+						// 			} else {
+						// 				alert(data.msg);
+						// 			}
+						// 		});
+						// 	}
+						// },
 
 						//修改
 						updateCardtype: function (data) {
@@ -385,10 +392,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							vm.update.tid = data.tid;
 							vm.update.tname = data.tname;
 							vm.update.timg = data.timg;
-							//这里本来是 uState,uPhone...的，也就是要和实体类属性一样，但是因为你的 前面只有一个字母 他不能识别为驼峰命名规则，所有你传值的时候注意点，后台有@RequestBody的
+
 						},
 
-						//保存更改(后台参数有 @RequestBody 注解 的用下面这种请求方式)(还有你建的数据库表不符合驼峰命名规则，有@RequestBody 注解的时候， 实体类属性是 uId 要写成 uid)
 						saveUpdate: function () {
 							$.ajax({
 								type: "POST",
@@ -425,6 +431,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									}
 								}
 							});
+						},
+						logout:function () {
+							var flag = confirm("您确定要退出登录吗？")
+							if(flag){
+								sessionStorage.clear()
+								window.location.href = "login.html";
+							}
 						}
 					}
 

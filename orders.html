@@ -2,7 +2,7 @@
 <html>
 
 	<head>
-		<title>卡种管理</title>
+		<title>订单管理</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -42,7 +42,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	</head>
 
 	<body class="cbp-spmenu-push">
-		<div class="main-content">
+		<div class="main-content" id="main">
 			<!--left-fixed -navigation-->
 			<div class=" sidebar" role="navigation">
 				<div class="navbar-collapse">
@@ -59,6 +59,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									</li>
 									<li>
 										<a href="cardpwd.html">卡密管理</a>
+									</li>
+									<li>
+										<a href="cardprice.html">面值管理</a>
 									</li>
 								</ul>
 								<!-- /nav-second-level -->
@@ -125,7 +128,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 									<div class="profile_img">
 										<div class="user-name">
-											<p>小卡</p>
+											<p>{{adminInfo.aname}}</p>
 										</div>
 										<i class="fa fa-angle-down lnr"></i>
 										<i class="fa fa-angle-up lnr"></i>
@@ -133,9 +136,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									</div>
 								</a>
 								<ul class="dropdown-menu drp-mnu">
-									<li>
-										<a href="#"><i class="fa fa-user"></i>个人信息</a>
-									</li>
+									<li @click="logout()"> <a href="#" id="logout"><i class="fa fa-sign-out"></i>退出</a> </li>
 								</ul>
 							</li>
 						</ul>
@@ -172,7 +173,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<table class="table">
 							<thead>
 								<tr>
-									<th>#</th>
 									<th>订单日期</th>
 									<th>种类</th>
 									<th>面值</th>
@@ -185,106 +185,18 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<th scope="row">1</th>
-									<td>2020/04/04</td>
-									<td>骏网一卡通</td>
-									<td>50元</td>
-									<td>a123456</td>
-									<td>47元</td>
-									<td>5279179467954919</td>
-									<td>1636126585867474</td>
-									<td>已发货</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">2</th>
-									<td>2020/04/05</td>
-									<td>蓝港一卡通</td>
-									<td>10元</td>
-									<td>a123456</td>
-									<td>9.6元</td>
-									<td>7825177179896075</td>
-									<td>5623716692337706</td>
-									<td>已发货</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">3</th>
-									<td>2020/04/05</td>
-									<td>骏网一卡通</td>
-									<td>100元</td>
-									<td>a123456</td>
-									<td>92元</td>
-									<td>5023006428985862</td>
-									<td>4144229753077244</td>
-									<td>已发货</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">4</th>
-									<td>2020/04/04</td>
-									<td>冒泡一卡通</td>
-									<td>30元</td>
-									<td>a123456</td>
-									<td>27元</td>
-									<td>2183410834691869</td>
-									<td>3433174550005397</td>
-									<td>已发货</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">5</th>
-									<td>2020/04/04</td>
-									<td>骏网一卡通</td>
-									<td>30元</td>
-									<td>a123456</td>
-									<td>27元</td>
-									<td>5084990435359059</td>
-									<td>2357859185298774</td>
-									<td>已发货</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">6</th>
-									<td>2020/04/04</td>
-									<td>骏网一卡通</td>
-									<td>20元</td>
-									<td>a123456</td>
-									<td>18.5元</td>
-									<td>5023006428985862</td>
-									<td>4144229753077244</td>
-									<td>已发货</td>
-									<td>
-										<a href="">删除</a>&nbsp;&nbsp;
-										<a href="">修改</a>
-									</td>
-								</tr>
-								<tr>
-									<th scope="row">7</th>
-									<td>2020/04/04</td>
-									<td>骏网一卡通</td>
-									<td>530元</td>
-									<td>a123456</td>
-									<td>27元</td>
-									<td>3342277345566337</td>
-									<td>1022364432944324</td>
-									<td>已发货</td>
+								<tr v-for="(data,index) in dataList">
+									<td>{{(data.odate).substring(0,10)}}</td>
+									<td>{{data.tname}}</td>
+									<td>{{data.mname}}</td>
+									<td>{{data.unumber}}</td>
+									<td>{{data.oprice}}</td>
+									<td>{{data.cnumber}}</td>
+									<td>{{data.cpassword}}</td>
+									<td v-if="data.ostate == 1">未付款</td>
+									<td v-if="data.ostate == 2">已付款</td>
+									<td v-if="data.ostate == 3">已发货</td>
+									<td v-if="data.ostate == 4">已完成</td>
 									<td>
 										<a href="">删除</a>&nbsp;&nbsp;
 										<a href="">修改</a>
@@ -298,34 +210,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<div class="col-md-4">
 
 						</div>
-						<div class="col-md-4">
-							<nav>
-								<ul class="pagination pagination-lg">
-									<li>
-										<a href="#" aria-label="Previous"><span aria-hidden="true">«</span></a>
-									</li>
-									<li>
-										<a href="#">1</a>
-									</li>
-									<li>
-										<a href="#">2</a>
-									</li>
-									<li>
-										<a href="#">3</a>
-									</li>
-									<li>
-										<a href="#">4</a>
-									</li>
-									<li>
-										<a href="#">5</a>
-									</li>
-									<li>
-										<a href="#" aria-label="Next"><span aria-hidden="true">»</span></a>
-									</li>
-								</ul>
-							</nav>
+						<div class="col-md-5">
+							<ul id="page"></ul>
 						</div>
-						<div class="col-md-4">
+						<div class="col-md-3">
 
 						</div>
 					</div>
@@ -338,6 +226,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<!--//footer-->
 			</div>
+		</div>
 			<!-- Classie -->
 			<script src="js/classie.js"></script>
 			<script>
@@ -363,7 +252,162 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			<script src="js/scripts.js"></script>
 			<!--//scrolling js-->
 			<!-- Bootstrap Core JavaScript -->
-			<script src="js/bootstrap.js">
+			<script src="js/bootstrap.js"></script>
+			<!--引入vue.js-->
+			<script src="js/vue.min.js"></script>
+			<!--引入分页插件js-->
+			<script src="js/bootstrap-paginator.js"></script>
+			<script>
+				var vm = new Vue({
+					el:"#main", //包含整个页面 div 的 id名称
+					data:{
+						adminInfo:{},
+						//查询用户信息所需的参数
+						params:{
+							pageSize:10,
+							currentPage:1, //当前页
+							pages:1
+						},
+						//修改所需参数
+						update:{
+							uid:null,
+							uname:"",
+							unumber:"",
+							upassword:"",
+							uemail:"",
+							uphone:"",
+							ustate:1,
+							udate:''
+						},
+						dataList:[],//用户保存请求到的数据（是一个list）
+					},
+					//页面初始化加载的方法
+					mounted:function () {
+						this.adminInfo = JSON.parse(window.sessionStorage.getItem("admin"));
+						console.log(this.adminInfo)
+						if (this.adminInfo == null) {
+							alert("请先登陆!");
+							window.location.href = "login.html";
+						}
+						//初始化分页模板
+						var options = {
+							bootstrapMajorVersion: 3,
+							currentPage: this.params.currentPage, // 当前页数
+							numberOfPages: 5, // 显示按钮的数量
+							totalPages: this.params.pages, // 总页数
+							onPageClicked:function(event, originalEvent, type,page){
+								vm.params.currentPage=page;
+								vm.selectOrders();
+							},
+							onPageChanged:function(event, oldPage, newPage){
+								vm.params.currentPage=newPage;
+								vm.selectOrders();
+							}
+						};
+						$("#page").bootstrapPaginator(options);
+
+						this.selectOrders();
+					},
+					//页面单击事件
+					methods:{
+						//查询用户信息
+						selectOrders:function () {
+							var url = "http://localhost:8000/orders/selectOrders";
+							$.get(url,this.params,function (data) {
+								if (data.code === 0){
+									//console.log(data); //打印结果到控制台
+									vm.dataList = data.dataList; //结果
+									vm.params.pages = data.pages;//总页数
+									vm.params.currentPage = data.pageNum //第几页
+									//设置分页(当前页,总页数)
+									$("#page").bootstrapPaginator('setOptions',{currentPage:vm.params.currentPage,totalPages:vm.params.pages});
+								}else {
+									alert(data.msg);
+								}
+							});
+						},
+
+						//删除
+						deleteOrders:function (oId) {
+							var flag = confirm("确定删除这条数据吗?");
+							if (flag){
+								var url = "http://localhost:8000/Orders/deleteOrders";
+								var args = {
+									"oId":oId
+								}
+								$.post(url,args,function (data) {
+									if (data.code === 0){
+										alert(data.msg);
+										//删除成功后重新查一遍
+										vm.selectOrders();
+									}else {
+										alert(data.msg);
+									}
+								});
+							}
+						},
+
+						//修改
+						updateUser:function (data) {
+							console.log(data);
+							vm.update.uid = data.uid;
+							vm.update.uname = data.uname;
+							vm.update.unumber = data.unumber;
+							vm.update.upassword = data.upassword;
+							vm.update.uemail = data.uemail;
+							vm.update.uphone = data.uphone;
+							vm.update.ustate = data.ustate;
+							//这里本来是 uState,uPhone...的，也就是要和实体类属性一样，但是因为你的 前面只有一个字母 他不能识别为驼峰命名规则，所有你传值的时候注意点，后台有@RequestBody的
+						},
+
+						//保存更改(后台参数有 @RequestBody 注解 的用下面这种请求方式)(还有你建的数据库表不符合驼峰命名规则，有@RequestBody 注解的时候， 实体类属性是 uId 要写成 uid)
+						saveUpdate:function(){
+							$.ajax({
+								type: "POST",
+								url:"http://localhost:8000/users/updateUsers",
+								dataType:"json",
+								contentType: "application/json",
+								data:JSON.stringify(vm.update),
+								success:function (data) {
+									if (data.code === 0){
+										alert(data.msg);
+										$("#users-updatemodal").modal('hide');//关闭模特框
+										vm.selectUsers();
+									}else {
+										alert(data.msg);
+									}
+								}
+							});
+						},
+
+						//添加
+						addUser:function () {
+							$.ajax({
+								type: "POST",
+								url:"http://localhost:8000/users/addUsers",
+								dataType:"json",
+								contentType: "application/json",
+								data:JSON.stringify(vm.add),
+								success:function (data) {
+									if (data.code === 0){
+										alert(data.msg);
+										$("#users-addmodal").modal('hide');//关闭模特框
+										vm.selectUsers();
+									}else {
+										alert(data.msg);
+									}
+								}
+							});
+						},
+						logout:function () {
+							var flag = confirm("您确定要退出登录吗？")
+							if(flag){
+								sessionStorage.clear()
+								window.location.href = "login.html";
+							}
+						}
+					}
+				});
 			</script>
 	</body>
 

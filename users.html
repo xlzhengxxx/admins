@@ -2,7 +2,7 @@
 <html>
 
 	<head>
-		<title>卡种管理</title>
+		<title>用户管理</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<meta name="keywords" content="Novus Admin Panel Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -125,7 +125,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 								<div class="profile_img">	
 									<div class="user-name">
-										<p>小卡</p>
+										<p>{{adminInfo.aname}}</p>
 										
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
@@ -134,7 +134,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</div>	
 							</a>
 							<ul class="dropdown-menu drp-mnu">
-								<li> <a href="#" id="logout"><i class="fa fa-sign-out"></i>退出</a> </li>
+								<li @click="logout()"> <a href="#" id="logout"><i class="fa fa-sign-out"></i>退出</a> </li>
 							</ul>
 						</li>
 					</ul>
@@ -173,6 +173,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<th>密码</th>
 									<th>邮箱</th>
 									<th>电话</th>
+									<th>注册时间</th>
 									<th>状态</th>
 									<th>操作</th>
 								</tr>
@@ -184,6 +185,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<td>{{data.upassword}}</td>
 									<td>{{data.uemail}}</td>
 									<td>{{data.uphone}}</td>
+									<td>{{(data.udate).substring(0,10)}}</td>
 									<td v-if="data.ustate == 1">正常</td>
 									<td v-else="">禁用</td>
 									<td>
@@ -362,6 +364,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 				var vm = new Vue({
 					el:"#main", //包含整个页面 div 的 id名称
 					data:{
+						adminInfo:{},
 						//查询用户信息所需的参数
 						params:{
 							uNumber:'',
@@ -378,7 +381,8 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							upassword:"",
 							uemail:"",
 							uphone:"",
-							ustate:1
+							ustate:1,
+							udate:''
 						},
 						//添加所需参数
 						add:{
@@ -387,12 +391,19 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							upassword:"",
 							uemail:"",
 							uphone:"",
+							udate:"",
 							ustate:1
 						},
 						dataList:[],//用户保存请求到的数据（是一个list）
 					},
 					//页面初始化加载的方法
 					mounted:function () {
+						this.adminInfo = JSON.parse(window.sessionStorage.getItem("admin"));
+						console.log(this.adminInfo)
+						if (this.adminInfo == null) {
+							alert("请先登陆!");
+							window.location.href = "login.html";
+						}
 						//初始化分页模板
 						var options = {
 							bootstrapMajorVersion: 3,
@@ -502,6 +513,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									}
 								}
 							});
+						},
+						logout:function () {
+							var flag = confirm("您确定要退出登录吗？")
+							if(flag){
+								sessionStorage.clear()
+								window.location.href = "login.html";
+							}
 						}
 					}
 				});

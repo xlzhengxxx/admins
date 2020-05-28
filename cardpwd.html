@@ -125,7 +125,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 								<div class="profile_img">	
 									<div class="user-name">
-										<p>小卡</p>
+										<p>{{adminInfo.aname}}</p>
 										
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
@@ -134,7 +134,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</div>	
 							</a>
 							<ul class="dropdown-menu drp-mnu">
-								<li> <a href="#" id="logout"><i class="fa fa-sign-out"></i>退出</a> </li>
+								<li @click="logout()"> <a href="#" id="logout"><i class="fa fa-sign-out"></i>退出</a> </li>
 							</ul>
 						</li>
 					</ul>
@@ -155,10 +155,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入点卡账号" type="search" v-model="params.cNumber"  />
 						</div>
 						<div class="col-md-2">
-							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入点卡种类" type="search" v-model="params.cType" />
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入点卡种类" type="search" v-model="params.tName" />
 						</div>
 						<div class="col-md-2">
-							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入点卡面值" type="search" v-model="params.mId" />
+							<input style="height: 35px;margin-top: 5px;" class="sb-search-input input__field--madoka" placeholder="请输入点卡面值" type="search" v-model="params.mName" />
 						</div>
 						<div class="col-md-1">
 							<h3 style="padding-top: 5px;"><a href="#"><span class="label label-primary" @click="selectCard()">查询</span></a></h3>
@@ -184,9 +184,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<tr v-for="(data,index) in dataList">
 									<td>{{data.cnumber}}</td>
 									<td>{{data.cpassword}}</td>
-									<td>{{data.ctype}}</td>
-									<td>{{data.mid}}</td>
-									<td>{{data.cprice}}</td>
+									<td>{{data.tname}}</td>
+									<td>{{data.mname}}</td>
+									<td>&yen;{{data.cprice}}</td>
 									<td v-if="data.cstate == 2">未售</td>
 									<td v-else="">已售</td>
 									<td>
@@ -222,32 +222,49 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<div class="form-group">
 										<label for="focusedinput" class="col-sm-2 control-label">点卡种类</label>
 										<div class="col-sm-8">
-											<select  class="form-control1">
-												<option>盛大一卡通</option>
-												<option>骏网一卡通</option>
-												<option>网易一卡通</option>
-												<option>冒泡一卡通</option>
+											<select name="selector1" class="form-control1" v-model="add.ctype">
+												<option value="1">盛大一卡通</option>
+												<option value="2">冒泡一卡通</option>
+												<option value="3">网易一卡通</option>
+												<option value="4">骏网一卡通</option>
+												<option value="5">天宏一卡通</option>
+												<option value="6">光宇一卡通</option>
+												<option value="7">蓝港一卡通</option>
+												<option value="8">腾讯一卡通</option>
 											</select>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="focusedinput" class="col-sm-2 control-label">点卡面值</label>
 										<div class="col-sm-8">
-											<select  name="selector1"  class="form-control1" >
-												<option ></option>
+											<select  name="selector1" class="form-control1" v-model="add.mid">
+												<option value="1">1元</option>
+												<option value="2">5元</option>
+												<option value="2">10元</option>
+												<option value="4">20元</option>
+												<option value="5">30元</option>
+												<option value="6">50元</option>
+												<option value="7">100元</option>
+												<option value="8">200元</option>
 											</select>
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="focusedinput" class="col-sm-2 control-label">点卡账号</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control1"  placeholder="请输入点卡账号...">
+											<input type="text" class="form-control1"  placeholder="请输入点卡账号..." v-model="add.cnumber">
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="focusedinput" class="col-sm-2 control-label">点卡密码</label>
 										<div class="col-sm-8">
-											<input  type="text" class="form-control1"  placeholder="请输入点卡密码...">
+											<input  type="text" class="form-control1"  placeholder="请输入点卡密码..." v-model="add.cpassword">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="focusedinput" class="col-sm-2 control-label">点卡价格</label>
+										<div class="col-sm-8">
+											<input  type="text" class="form-control1"  placeholder="请输入点卡价格..." v-model="add.cprice">
 										</div>
 									</div>
 								</form>
@@ -255,7 +272,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-								<button type="button" class="btn btn-primary">添加</button>
+								<button type="button" class="btn btn-primary" @click="addCard()">添加</button>
 							</div>
 						</div>
 					</div>
@@ -272,7 +289,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<div class="form-group">
 										<label for="focusedinput" class="col-sm-2 control-label">点卡种类</label>
 										<div class="col-sm-8">
-											<select name="selector1" id="selector1" class="form-control1" v-model="update.ctype">
+											<select name="selector1"  class="form-control1" v-model="update.ctype">
 												<option value="1">盛大一卡通</option>
 												<option value="2">冒泡一卡通</option>
 												<option value="3">网易一卡通</option>
@@ -302,13 +319,28 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									<div class="form-group">
 										<label for="focusedinput" class="col-sm-2 control-label">点卡账号</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control1" id="focusedinput" placeholder="请输入点卡账号..." v-model="update.cnumber">
+											<input type="text" class="form-control1" id="focusedinput" v-model="update.cnumber">
 										</div>
 									</div>
 									<div class="form-group">
 										<label for="focusedinput" class="col-sm-2 control-label">点卡密码</label>
 										<div class="col-sm-8">
-											<input type="text" class="form-control1"  placeholder="请输入点卡密码..." v-model="update.cpassword">
+											<input type="text" class="form-control1" v-model="update.cpassword">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="focusedinput" class="col-sm-2 control-label">点卡价格</label>
+										<div class="col-sm-8">
+											<input type="text" class="form-control1" v-model="update.cprice">
+										</div>
+									</div>
+									<div class="form-group">
+										<label for="focusedinput" class="col-sm-2 control-label">点卡面值</label>
+										<div class="col-sm-8">
+											<select  name="selector1" class="form-control1" v-model="update.cstate">
+												<option value="1">已售</option>
+												<option value="2">未售</option>
+											</select>
 										</div>
 									</div>
 								</form>
@@ -316,7 +348,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-								<button type="button" class="btn btn-primary">提交更改</button>
+								<button type="button" class="btn btn-primary" @click="saveUpdate()">提交更改</button>
 							</div>
 						</div>
 					</div>
@@ -363,11 +395,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 			var vm = new Vue({
 				el:"#main", //包含整个页面 div 的 id名称
 				data:{
+					adminInfo:{},
 					//查询用户信息所需的参数
 					params:{
 						cNumber:'',
-						cType:'',
-						mId:'',
+						tName:'',
+						mName:'',
 						pageSize:10,
 						currentPage:1, //当前页
 						pages:1
@@ -390,12 +423,18 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						ctype:"",
 						mid:"",
 						cprice:"",
-						cstate:""
+						cstate:2
 					},
 					dataList:[],//用户保存请求到的数据（是一个list）
 				},
 				//页面初始化加载的方法
 				mounted:function () {
+					this.adminInfo = JSON.parse(window.sessionStorage.getItem("admin"));
+					console.log(this.adminInfo)
+					if (this.adminInfo == null) {
+						alert("请先登陆!");
+						window.location.href = "login.html";
+					}
 					//初始化分页模板
 					var options = {
 						bootstrapMajorVersion: 3,
@@ -486,7 +525,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 					},
 
 					//添加
-					addUser:function () {
+					addCard:function () {
 						$.ajax({
 							type: "POST",
 							url:"http://localhost:8000/card/addCard",
@@ -503,6 +542,13 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								}
 							}
 						});
+					},
+					logout:function () {
+						var flag = confirm("您确定要退出登录吗？")
+						if(flag){
+							sessionStorage.clear()
+							window.location.href = "login.html";
+						}
 					}
 				}
 			});

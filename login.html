@@ -16,7 +16,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <link href="css/font-awesome.css" rel="stylesheet"> 
 <!-- //font-awesome icons -->
  <!-- js-->
-<script src="js/jquery-1.11.1.min.js"></script>
+<script src="js/jquery.min.js"></script>
 <script src="js/modernizr.custom.js"></script>
 <!--//webfonts--> 
 <!--animate-->
@@ -33,7 +33,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!--//Metis Menu -->
 </head> 
 <body class="cbp-spmenu-push">
-	<div class="main-content">
+	<div class="main-content" id="main">
 		<div style="margin-top: 80px;">
 			<div class="main-page login-page ">
 				<h3 class="title1">管理员登录</h3>
@@ -42,10 +42,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 						<h4>欢迎登陆点卡销售系统！</h4>
 					</div>
 					<div class="login-body">
-						<form>
-							<input type="text" class="user" name="adminnumber" placeholder="请输入账号" required="">
-							<input type="password" name="password" class="lock" placeholder="请输入密码">
-							<input type="submit" name="登录" value="登录">
+						<form action="#">
+							<input type="text" class="user" name="adminnumber" placeholder="请输入账号" required="" v-model="login.anumber">
+							<input type="password" name="password" class="lock" placeholder="请输入密码" v-model="login.apassword">
+							<input type="submit" @click="loginss()"  value="登录">
 						</form>
 					</div>
 				</div>
@@ -57,9 +57,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<!--footer-->
 		<div class="footer">
-		   <p>Copyright &copy; 2016.Company name All rights reserved.<a target="_blank" href="http://www.17sucai.com/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a></p>
+			<p>Copyright &copy; 2020.Company name All rights reserved.呖咕呖咕
+			</p>
 		</div>
-        <!--//footer-->
+		<!--//footer-->
 	</div>
 	<!-- Classie -->
 		<script src="js/classie.js"></script>
@@ -87,5 +88,43 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 	<!--//scrolling js-->
 	<!-- Bootstrap Core JavaScript -->
    <script src="js/bootstrap.js"> </script>
+	<!--引入vue.js-->
+	<script src="js/vue.min.js"></script>
+	<!--引入分页插件js-->
+	<script src="js/bootstrap-paginator.js"></script>
+	<script>
+		var vm = new Vue({
+			el:"#main",
+			data:{
+				//登录所需参数
+				login:{
+					anumber:"",
+					apassword:""
+				},
+				dataList:[],//保存请求到的数据（是一个list）
+			},
+			//页面单击事件
+			methods: {
+				//管理员登录
+				loginss:function () {
+					var url = "http://localhost:8000/admins/login";
+					args = {
+						"aNumber":vm.login.anumber,
+						"aPassword":vm.login.apassword
+					};
+					$.post(url,args,function (data) {
+						console.log(data)
+						if (data.code === 0){
+							window.sessionStorage.setItem("admin",JSON.stringify(data.adminsEntity))
+							window.location.href = "index.html";
+						}else {
+							alert(data.msg);
+						}
+					})
+				}
+			}
+
+		});
+	</script>
 </body>
 </html>

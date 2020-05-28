@@ -38,7 +38,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!--//Metis Menu -->
 </head> 
 	<body class="cbp-spmenu-push">
-		<div class="main-content">
+		<div class="main-content" id="main">
 			<!--left-fixed -navigation-->
 		<div class=" sidebar" role="navigation">
             <div class="navbar-collapse">
@@ -121,7 +121,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 								<div class="profile_img">
 									<div class="user-name">
-										<p>小卡</p>
+										<p>{{adminInfo.aname}}</p>
 									</div>
 									<i class="fa fa-angle-down lnr"></i>
 									<i class="fa fa-angle-up lnr"></i>
@@ -129,7 +129,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								</div>	
 							</a>
 							<ul class="dropdown-menu drp-mnu">
-								<li> <a href="#"><i class="fa fa-user"></i>个人信息</a> </li>
+								<li @click="logout()"> <a href="#" id="logout"><i class="fa fa-sign-out" ></i>退出</a> </li>
 							</ul>
 						</li>
 					</ul>
@@ -149,7 +149,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<h4>订单数</h4>
 							</div>
 							<div class="stats-right">
-								<label> 388</label>
+								<label> {{countData.i1}}</label>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -159,7 +159,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<h4>订单数</h4>
 							</div>
 							<div class="stats-right">
-								<label class="money"> 55</label>
+								<label class="money"> {{countData.i2}}</label>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -169,7 +169,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 								<h4>用户增长</h4>
 							</div>
 							<div class="stats-right">
-								<label>51</label>
+								<label>1</label>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -199,25 +199,25 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 									</tr>
 									<tr>
 										<th scope="row">2</th>
-										<td><span class="label label-success">冒泡一卡通</span></td>
+										<td><span class="label label-success">天宏一卡通</span></td>
 										<td>50元</td>
 										<td><span class="label label-danger">55</span></td>
 									</tr>
 									<tr>
 										<th scope="row">3</th>
-										<td><span class="label label-success">冒泡一卡通</span></td>
+										<td><span class="label label-success">天宏一卡通</span></td>
 										<td>30元</td>
 										<td><span class="label label-danger">77</span></td>
 									</tr>
 									<tr>
 										<th scope="row">4</th>
-										<td><span class="label label-success">冒泡一卡通</span></td>
+										<td><span class="label label-success">蓝港一卡通</span></td>
 										<td>100元</td>
 										<td><span class="label label-danger">85</span></td>
 									</tr>
 									<tr>
 										<th scope="row">5</th>
-										<td><span class="label label-success">冒泡一卡通</span></td>
+										<td><span class="label label-success">盛大一卡通</span></td>
 										<td>10元</td>
 										<td><span class="label label-danger">105</span></td>
 									</tr>
@@ -231,20 +231,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 							</table>
 						</div>
 						<div class="clearfix"> </div>
-						<script>
-							var barChartData = {
-								labels: ["04/02", "04/03", "04/04", "04/05", "04/06", "04/07", "04/08"],
-								datasets: [{
-									fillColor: "rgba(233, 78, 2, 0.9)",
-									strokeColor: "rgba(233, 78, 2, 0.9)",
-									highlightFill: "#e94e02",
-									highlightStroke: "#e94e02",
-									data: [5858, 5959, 9059, 8114, 5600, 5505, 4096]
-								}]
-							};
 
-							new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
-						</script>
 					</div>
 				</div>
 			</div>
@@ -280,8 +267,72 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 		<script src="js/scripts.js"></script>
 		<!--//scrolling js-->
 		<!-- Bootstrap Core JavaScript -->
-		<script src="js/bootstrap.js">
-		</script>
+		<script src="js/bootstrap.js"></script>
+		<!--引入vue.js-->
+		<script src="js/vue.min.js"></script>
+		<!--引入分页插件js-->
+		<script src="js/bootstrap-paginator.js"></script>
+	<script>
+		var vm = new Vue({
+			el:"#main",
+			data:{
+				adminInfo:{},
+				countData:{
+					i1:0,
+					i2:0,
+					i3:0
+				},
+			},
+
+			mounted:function(){
+				this.selectDates();
+				this.adminInfo = JSON.parse(window.sessionStorage.getItem("admin"));
+				console.log(this.adminInfo)
+				if (this.adminInfo == null) {
+					alert("请先登陆!");
+					window.location.href = "login.html";
+				}
+			},
+
+			methods: {
+				selectDates:function () {
+					var url = "http://localhost:8000/orders/selectWeekOrders";
+					$.get(url,null,function (data) {
+						if (data.code === 0){
+							//console.log(data); //打印结果到控制台
+							vm.countData.i1 = data.i1;
+							vm.countData.i2 = data.i2;
+							vm.countData.i3 = data.i3;
+						}else {
+							alert(data.msg);
+						}
+					});
+				},
+
+				logout:function () {
+					var flag = confirm("您确定要退出登录吗？")
+					if(flag){
+						sessionStorage.clear()
+						window.location.href = "login.html";
+					}
+				}
+
+			}
+
+		});
+		var barChartData = {
+			labels: ["05/19", "05/20", "05/21", "05/22", "05/23", "05/24", "05/25"],
+			datasets: [{
+				fillColor: "rgba(233, 78, 2, 0.9)",
+				strokeColor: "rgba(233, 78, 2, 0.9)",
+				highlightFill: "#e94e02",
+				highlightStroke: "#e94e02",
+				data: [50.00, 154.00, 37.50, 84.55, 122.40,114.25, 98.25]
+			}]
+		};
+
+		new Chart(document.getElementById("bar").getContext("2d")).Bar(barChartData);
+	</script>
 	</body>
 
 </html>
